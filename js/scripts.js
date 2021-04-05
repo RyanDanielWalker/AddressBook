@@ -114,16 +114,16 @@ TaskList.prototype.viewTasks = function (indexID) {
   return newArray
 }
 
-TaskList.prototype.taskName = function () {
-  return this.tasks.task;
-}
+// TaskList.prototype.taskName = function () {
+//   return this.tasks.task;
+// }
 
 // Business Logic for Tasks
 function Tasks(task) {
   this.task = task
 }
 
-let masterList = new TaskList()
+let masterList = new TaskList();
 
 $(document).ready(function () {
   $("#task").submit(function (event) {
@@ -132,7 +132,11 @@ $(document).ready(function () {
     let newTask = $("#user-input").val()
     taskToAdd = new Tasks(newTask)
     masterList.addTask(taskToAdd)
-    $(".list").before(`<p>${masterList.viewTasks(masterList.currentId)}</p>`);
+    $("#list").empty();
+    let myArray = masterList.viewTasks(masterList.currentId);
+    myArray.forEach(element => {
+      $("#list").append(`<p>${element}</p>`);
+    });
   })
 })
 
