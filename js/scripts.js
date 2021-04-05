@@ -61,7 +61,7 @@ PlacesIHaveBeen.prototype.addDestination = function(destination) {
   this.destinations[destination.id] = destination
 }
 PlacesIHaveBeen.prototype.findDestination = function(id){
-    if (this.destinations[id] != undifined){
+    if (this.destinations[id] != undefined){
         return this.destinations[id];
     } else{
         return false;
@@ -72,6 +72,34 @@ PlacesIHaveBeen.prototype.deleteDestination = function(id){
         return false;
     } else {
         delete this.destinations[id];
-        return console.log("deleted successfully");
+        return true;
     }
 }
+// Business Logic for TaskList
+function TaskList() {
+  this.tasks = {}
+  this.currentId = 0
+}
+TaskList.prototype.assignId = function() {
+  this.currentId += 1
+  return this.currentId
+}
+
+TaskList.prototype.addTask = function(task) {
+  task.id = this.assignId()
+  this.tasks[task.id] = task
+}
+TaskList.prototype.deleteTask = function(id) {
+  if (this.tasks[id] === undefined) {
+    return this.tasks[id]
+  }
+  delete this.tasks[id]
+  return true
+}
+  
+
+// Business Logic for Tasks
+function Tasks() {
+  this.task = task
+}
+
