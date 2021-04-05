@@ -52,14 +52,17 @@ function PlacesIHaveBeen() {
   this.destinations = {}
   this.currentId = 0
 }
+
 PlacesIHaveBeen.prototype.assignId = function () {
   this.currentId += 1
   return this.currentId
 }
+
 PlacesIHaveBeen.prototype.addDestination = function (destination) {
   destination.id = this.assignId()
   this.destinations[destination.id] = destination
 }
+
 PlacesIHaveBeen.prototype.findDestination = function (id) {
   if (this.destinations[id] != undefined) {
     return this.destinations[id];
@@ -67,6 +70,7 @@ PlacesIHaveBeen.prototype.findDestination = function (id) {
     return false;
   }
 }
+
 PlacesIHaveBeen.prototype.deleteDestination = function (id) {
   if (this.destinations[id] === undefined) {
     return false;
@@ -75,11 +79,13 @@ PlacesIHaveBeen.prototype.deleteDestination = function (id) {
     return true;
   }
 }
+
 // Business Logic for TaskList
 function TaskList() {
   this.tasks = {}
   this.currentId = 0
 }
+
 TaskList.prototype.assignId = function () {
   this.currentId += 1
   return this.currentId
@@ -89,6 +95,7 @@ TaskList.prototype.addTask = function (task) {
   task.id = this.assignId()
   this.tasks[task.id] = task
 }
+
 TaskList.prototype.deleteTask = function (id) {
   if (this.tasks[id] === undefined) {
     return this.tasks[id]
@@ -97,8 +104,22 @@ TaskList.prototype.deleteTask = function (id) {
   return true
 }
 
+
+TaskList.prototype.viewTasks = function (indexID) {
+  let newArray = []
+  for (let i = 1; i <= indexID; i++) {
+    let myString = masterList.tasks[i].task;
+    newArray.push(myString + " ")
+  }
+  return newArray
+}
+
+TaskList.prototype.taskName = function () {
+  return this.tasks.task;
+}
+
 // Business Logic for Tasks
-function Tasks() {
+function Tasks(task) {
   this.task = task
 }
 
@@ -111,12 +132,12 @@ $(document).ready(function () {
     let newTask = $("#user-input").val()
     taskToAdd = new Tasks(newTask)
     masterList.addTask(taskToAdd)
-    console.log(masterList)
+    $(".list").before(`<p>${masterList.viewTasks(masterList.currentId)}</p>`);
   })
 })
 
 
-let tasks = ["task 1", "task 2"]
-tasks.forEach(function (task) {
-  masterList.addTask(task)
-})
+// let tasks = ["task 1", "task 2"]
+// tasks.forEach(function (task) {
+//   masterList.addTask(task)
+// })
